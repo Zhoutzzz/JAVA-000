@@ -56,7 +56,9 @@ G1中内存分为reigon，G1收集时只针对reigon，所以G1可以算作新�
 从JDK9开始，各个垃圾收集器的组合：
 
    XX:UseConcMarkSweepGC --> ParNew + CMS + Serial Old(CMS在发生并发收集失败时的备用老年代收集器);
+
    XX:UseSerialGC --> Serial + Serial Old;
+   
    XX:UseParallelGC Parallel Scavenge + Serial Old（PS MarkSweep--PS收集器中内置的老年代收集器，其实现与Serial Old几乎一致,但在回收老年代时，不会直接调用Serial Old回收，而是用PS MarkSweep回收）（JDK8 server模式下默认组合）;
    
    XX:UseParallelOldGC --> Parallel Scavenge + Parallel Old;
