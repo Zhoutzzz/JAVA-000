@@ -1,3 +1,7 @@
+package work5_jdkio;
+
+import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -5,21 +9,16 @@ import java.net.Socket;
 /**
  * @author ztz
  * @description TODO
- * @date 2020/10/25 16:12
+ * @date 2020/10/25 15:57
  */
-public class NewThreadIOTest {
+public class BioTest {
+
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(8802);
+        ServerSocket socket = new ServerSocket(8801);
         while (true) {
             Socket accept = socket.accept();
-            new Thread(() -> {
-                try {
-                    service(accept);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
+            service(accept);
         }
     }
 

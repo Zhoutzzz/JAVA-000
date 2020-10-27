@@ -1,21 +1,31 @@
-import java.io.IOException;
-import java.io.PrintStream;
+package work5_jdkio;
+
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author ztz
  * @description TODO
- * @date 2020/10/25 15:57
+ * @date 2020/10/25 16:12
  */
-public class BioTest {
+public class NewThreadIOTest {
+    private static AtomicInteger count = new AtomicInteger(0);
 
     public static void main(String[] args) throws Exception {
-        ServerSocket socket = new ServerSocket(8801);
+        ServerSocket socket = new ServerSocket(8802);
         while (true) {
             Socket accept = socket.accept();
-            service(accept);
+            new Thread(() -> {
+                count.incrementAndGet();
+                try {
+                    service(accept);
+                    System.out.println(count);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
     }
 

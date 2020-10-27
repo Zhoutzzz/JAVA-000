@@ -1,8 +1,12 @@
+package work5_jdkio;
+
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author ztz
@@ -10,10 +14,11 @@ import java.util.concurrent.Executors;
  * @date 2020/10/25 16:12
  */
 public class ThreadPoolIOTest {
+    private static AtomicInteger count = new AtomicInteger(0);
 
     public static void main(String[] args) throws Exception {
         ServerSocket socket = new ServerSocket(8803);
-        Executor executor = Executors.newFixedThreadPool(96);
+        Executor executor = Executors.newFixedThreadPool(24);
         while (true) {
             Socket accept = socket.accept();
             executor.execute(() -> service(accept));
