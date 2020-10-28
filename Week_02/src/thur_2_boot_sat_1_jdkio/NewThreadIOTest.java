@@ -1,4 +1,4 @@
-package work5_jdkio;
+package thur_2_boot_sat_1_jdkio;
 
 import java.io.PrintWriter;
 import java.net.ServerSocket;
