@@ -1,0 +1,3 @@
+zgateway:
+  listenPort: 8888
+  proxyAddr: www.baidu.com

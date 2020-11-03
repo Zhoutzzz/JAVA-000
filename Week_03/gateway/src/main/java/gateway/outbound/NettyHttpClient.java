@@ -13,11 +13,14 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.HttpClientCodec;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+
+import java.net.SocketAddress;
 
 public class NettyHttpClient {
 
-    public void connect(String host, int port, ChannelHandlerContext context, Object msg) throws Exception {
+    public void connect(SocketAddress address, ChannelHandlerContext context, Object msg) throws Exception {
         try {
             Bootstrap b = new Bootstrap();
             b.group(new NioEventLoopGroup());
@@ -36,7 +39,7 @@ public class NettyHttpClient {
             });
 
             // Start the client.
-            b.connect(host, port).sync().addListener(new ZGatewayListener(context, msg));
+            b.connect(address).sync().addListener(new ZGatewayListener(context, msg));
         } catch (Exception e) {
             e.printStackTrace();
         }
