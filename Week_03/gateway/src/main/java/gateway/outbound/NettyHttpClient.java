@@ -10,20 +10,23 @@ import gateway.listener.ZGatewayListener;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.http.HttpClientCodec;
-import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.*;
+import io.netty.util.concurrent.Future;
 
 import java.net.SocketAddress;
+import java.util.concurrent.TimeUnit;
 
 public class NettyHttpClient {
 
     public void connect(SocketAddress address, ChannelHandlerContext context, Object msg) throws Exception {
+        Bootstrap b = new Bootstrap();
+        EventLoopGroup workGroup = new NioEventLoopGroup();
         try {
-            Bootstrap b = new Bootstrap();
-            b.group(new NioEventLoopGroup());
+            b.group(workGroup);
             b.channel(NioSocketChannel.class);
 //            b.option(ChannelOption.SO_KEEPALIVE, true);
             b.handler(new ChannelInitializer<SocketChannel>() {
@@ -42,6 +45,8 @@ public class NettyHttpClient {
             b.connect(address).sync().addListener(new ZGatewayListener(context, msg));
         } catch (Exception e) {
             e.printStackTrace();
+            context.writeAndFlush(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR));
+            context.close();
         }
     }
 

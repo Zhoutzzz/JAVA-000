@@ -7,6 +7,6 @@ public class DefaultHttpRequestFilter extends AbstractHttpRequestFilter implemen
 
     @Override
     public void doFilter(FullHttpRequest fullRequest, ChannelHandlerContext ctx) {
-        fullRequest.headers().set("Nio", "galigeigei");
+        fullRequest.headers().set("GaLiLiGeiGei", "BoomBoomBoom");
     }
 }

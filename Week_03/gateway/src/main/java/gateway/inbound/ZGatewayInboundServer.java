@@ -10,6 +10,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+
+import java.util.List;
+
 /**
  * @author ztz
  * @description TODO
@@ -18,9 +21,9 @@ import io.netty.handler.logging.LoggingHandler;
 public class ZGatewayInboundServer {
     private int port;
 
-    private String proxyServer;
+    private List<String> proxyServer;
 
-    public ZGatewayInboundServer(int port, String proxyServer) {
+    public ZGatewayInboundServer(int port, List<String> proxyServer) {
         this.port=port;
         this.proxyServer = proxyServer;
     }

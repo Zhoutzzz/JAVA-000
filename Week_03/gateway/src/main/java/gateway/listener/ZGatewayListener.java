@@ -28,7 +28,12 @@ public class ZGatewayListener implements ChannelFutureListener {
 //            req.headers().set(HttpHeaders.Names.HOST, "127.0.0.1");
 //            req.headers().set(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.KEEP_ALIVE);
 //            req.headers().set(HttpHeaders.Names.CONTENT_LENGTH, f.content().readableBytes());
-            future.channel().writeAndFlush(msg);
+            try {
+                future.channel().writeAndFlush(msg);
+            } catch (Exception e) {
+                future.channel().close();
+                throw e;
+            }
 //            future.channel().closeFuture();
         } else {
             context.writeAndFlush(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.REQUEST_TIMEOUT));
