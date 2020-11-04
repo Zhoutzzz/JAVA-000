@@ -18,4 +18,8 @@ public enum RouteStrategy {
 
         return DEFAULT;
     }
+
+//    public static void addStrategy(String name) {
+//        new RouteStrategy(name);
+//    }
 }

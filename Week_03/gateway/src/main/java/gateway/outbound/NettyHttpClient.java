@@ -24,7 +24,7 @@ public class NettyHttpClient {
 
     public void connect(SocketAddress address, ChannelHandlerContext context, Object msg) throws Exception {
         Bootstrap b = new Bootstrap();
-        EventLoopGroup workGroup = new NioEventLoopGroup();
+        EventLoopGroup workGroup = new NioEventLoopGroup(12);
         try {
             b.group(workGroup);
             b.channel(NioSocketChannel.class);

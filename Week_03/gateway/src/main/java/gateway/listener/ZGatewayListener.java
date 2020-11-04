@@ -36,8 +36,6 @@ public class ZGatewayListener implements ChannelFutureListener {
             } catch (Exception e) {
                 future.channel().close();
                 throw e;
-            } finally {
-                ReferenceCountUtil.release(msg);
             }
 //            future.channel().closeFuture();
         } else {
