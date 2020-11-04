@@ -10,25 +10,29 @@ import gateway.listener.ZGatewayListener;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
-import io.netty.util.concurrent.Future;
 
 import java.net.SocketAddress;
-import java.util.concurrent.TimeUnit;
 
 public class NettyHttpClient {
 
+    private static final Bootstrap b = new Bootstrap();
+    private static final EventLoopGroup workGroup = new NioEventLoopGroup(12);
+
+    public NettyHttpClient() {
+        b.group(workGroup);
+        b.channel(NioSocketChannel.class);
+        b.option(ChannelOption.SO_KEEPALIVE, true);
+    }
+
     public void connect(SocketAddress address, ChannelHandlerContext context, Object msg) throws Exception {
-        Bootstrap b = new Bootstrap();
-        EventLoopGroup workGroup = new NioEventLoopGroup(12);
+
         try {
-            b.group(workGroup);
-            b.channel(NioSocketChannel.class);
-//            b.option(ChannelOption.SO_KEEPALIVE, true);
             b.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 public void initChannel(SocketChannel ch) throws Exception {
