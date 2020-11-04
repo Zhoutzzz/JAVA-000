@@ -3,12 +3,14 @@ package gateway.inbound;
 import gateway.outbound.NettyHttpClient;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.unix.DomainSocketAddress;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.HttpHeaderNames;
-import io.netty.resolver.InetSocketAddressResolver;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
+import io.netty.util.ReferenceCountUtil;
 
-import java.net.*;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 
 /**
  * @author ztz
@@ -24,6 +26,7 @@ public class ZGatewayInBoundHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         System.out.println("remoteAddress---->" + ctx.channel().remoteAddress());
         System.out.println("localAddress---->" + ctx.channel().localAddress());
+        System.out.println("channel---->" + ctx.channel().toString());
         try {
             if (msg instanceof FullHttpRequest) {
                 FullHttpRequest fullRequest = (FullHttpRequest) msg;
@@ -34,6 +37,8 @@ public class ZGatewayInBoundHandler extends ChannelInboundHandlerAdapter {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            ctx.writeAndFlush(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR));
+            ReferenceCountUtil.release(msg);
         }
     }
 
