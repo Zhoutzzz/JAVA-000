@@ -1,5 +1,6 @@
 package gateway.inbound;
 
+import gateway.route.RouteStrategy;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
@@ -22,10 +23,17 @@ public class ZGatewayInboundServer {
     private int port;
 
     private List<String> proxyServer;
+    private RouteStrategy strategy;
 
     public ZGatewayInboundServer(int port, List<String> proxyServer) {
         this.port=port;
         this.proxyServer = proxyServer;
+    }
+
+    public ZGatewayInboundServer(int port, List<String> proxyServer, RouteStrategy strategy) {
+        this.port=port;
+        this.proxyServer = proxyServer;
+        this.strategy = strategy;
     }
 
     public void run() throws Exception {
@@ -34,6 +42,9 @@ public class ZGatewayInboundServer {
         EventLoopGroup workerGroup = new NioEventLoopGroup(16);
 
         try {
+
+            ZGatewayInitializer initializer = strategy == null ? new ZGatewayInitializer(this.proxyServer) : new ZGatewayInitializer(this.strategy, this.proxyServer);
+
             ServerBootstrap b = new ServerBootstrap();
             b.option(ChannelOption.SO_BACKLOG, 128)
                     .option(ChannelOption.TCP_NODELAY, true)
@@ -46,7 +57,7 @@ public class ZGatewayInboundServer {
                     .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
 
             b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.INFO)).childHandler(new ZGatewayInitializer(this.proxyServer));
+                    .handler(new LoggingHandler(LogLevel.INFO)).childHandler(initializer);
 
             Channel ch = b.bind(port).sync().channel();
             ch.closeFuture().sync();

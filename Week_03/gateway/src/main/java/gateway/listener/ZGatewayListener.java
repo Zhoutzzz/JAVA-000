@@ -3,7 +3,10 @@ package gateway.listener;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
+import io.netty.util.ReferenceCountUtil;
 
 /**
  * @author ztz
@@ -33,6 +36,8 @@ public class ZGatewayListener implements ChannelFutureListener {
             } catch (Exception e) {
                 future.channel().close();
                 throw e;
+            } finally {
+                ReferenceCountUtil.release(msg);
             }
 //            future.channel().closeFuture();
         } else {
