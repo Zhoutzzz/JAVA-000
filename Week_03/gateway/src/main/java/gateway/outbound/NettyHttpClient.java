@@ -31,6 +31,7 @@ public class NettyHttpClient {
         b.option(ChannelOption.SO_KEEPALIVE, true);
     }
 
+
     public void connect(SocketAddress address, ChannelHandlerContext context, Object msg) throws Exception {
         b.handler(new ChannelInitializer<SocketChannel>() {
             @Override
