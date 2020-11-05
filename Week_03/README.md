@@ -9,7 +9,7 @@
 
 
 **当网络请求发送给netty时，首先被bossGroup接收，然后转发到workGroup，由workGroup中的轮EventLoop处理，每个EventLoop绑定多个Channel，将IO事件交由其中一个Channel处理，每个Channel绑定一个ChannelPipeline，作为实际IO事件的处理链，每个ChannelPipeline中绑定多个ChannelHandler，负责具体的处理步骤，根据ChannelHandler属于Inbound还是Outbound，处理顺序不同，每个ChannelHandler拥有一个ChannelHandlerContext，作为当前处理器将处理信息传到下一个处理器的媒介。**
-  ![netty图片][netty]
+  ![netty]
 
 ## EventLoopGroup
   
