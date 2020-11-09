@@ -35,13 +35,13 @@
   出站处理器
 ## ByteBuf
 
-  网络中传输的数据流的统一抽象。
+ 即数据被应用程序从字节流读出后统一存放的容器。
 
 ## 关于Inbound与Outbound执行顺序
 ```
           ch.pipeline().addLast(new InboundHandler1());
           ch.pipeline().addLast(new OutboundHandler1());
-          ch.pipeline().addLast(new OutboundHandler2());
+            ch.pipeline().addLast(new OutboundHandler2());
           ch.pipeline().addLast(new InboundHandler2());
   或者：
           ch.pipeline().addLast(new OutboundHandler1());
@@ -57,3 +57,14 @@
 * InboundHandler通过ctx.write(msg)，则会传递到outboundHandler
 * 使用ctx.write(msg)传递消息，Inbound需要放在结尾，在Outbound之后，不然outboundhandler会不执行但是使用channel.write(msg)、pipline.write(msg)情况会不一致，都会执行,那是因为channel和pipline会贯穿整个流。
 * outBound和Inbound谁先执行，针对客户端和服务端而言，客户端是发起请求再接受数据，先outbound再inbound，服务端则相反。
+
+## 关于netty内存
+
+  netty有两种内存分配方式，一种分配到JVM堆中，交给JVM管理，一种分配到堆外物理内存。
+  netty对堆外内存的分配和管理，有池化和非池化方式，池化方式会从OS中申请一整块连续的内存进行管理，池中内存可以重复利用，非池化则直接从OS中申请用完即释放的内存。
+
+# TCP
+
+  三次握手四次挥手
+  发送syn 响应syn与ack，发送ack，连接建立。
+  发送fin，响应fin与ack，发送fin，响应fin，进入TIME_WAIT阶段，时间到扔没有连接，关闭，有则进行重复利用。

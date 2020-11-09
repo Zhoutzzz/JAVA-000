@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="629f3cbd-ad23-4348-91f2-b51baadf0f52" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Week_03/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Week_03/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Week_03/gateway/src/main/java/gateway/outbound/NettyHttpClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Week_03/gateway/src/main/java/gateway/outbound/NettyHttpClient.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\apache-maven-3.6.0-bin\apache-maven-3.6.0\repo" />
+        <option name="mavenHome" value="D:\IntelliJ IDEA 2019.3.4\plugins\maven\lib\maven3" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.6.0-bin\apache-maven-3.6.0\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1k2DcuQYdgCO488GExYBC91V0yJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RunManager" selected="Application.Homework03_ThreadPool">
+    <configuration name="CountDownLatchDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java0.conc0303.tool.CountDownLatchDemo" />
+      <module name="0301" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java0.conc0303.tool.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Homework03_FutureTask" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java0.conc0303.Homework03_FutureTask" />
+      <module name="0301" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java0.conc0303.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Homework03_ThreadPool" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java0.conc0303.Homework03_ThreadPool" />
+      <module name="0301" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java0.conc0303.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java0.conc0301.ThreadMain" />
+      <module name="0301" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java0.conc0301.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadMain2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java0.conc0301.ThreadMain2" />
+      <module name="0301" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java0.conc0301.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Homework03_ThreadPool" />
+        <item itemvalue="Application.Homework03_FutureTask" />
+        <item itemvalue="Application.CountDownLatchDemo" />
+        <item itemvalue="Application.ThreadMain2" />
+        <item itemvalue="Application.ThreadMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="629f3cbd-ad23-4348-91f2-b51baadf0f52" name="Default Changelist" comment="" />
+      <created>1604889876692</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604889876692</updated>
+      <workItem from="1604889878155" duration="19400000" />
+      <workItem from="1604911811675" duration="3669000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="605" y="132" key="#com.intellij.ide.util.MemberChooser" timestamp="1604915071396">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="605" y="132" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1604915071396" />
+    <state width="1556" height="207" key="GridCell.Tab.0.bottom" timestamp="1604915258920">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="207" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1604915258920" />
+    <state width="1556" height="207" key="GridCell.Tab.0.center" timestamp="1604915258920">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="207" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1604915258920" />
+    <state width="1556" height="207" key="GridCell.Tab.0.left" timestamp="1604915258920">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="207" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1604915258920" />
+    <state width="1556" height="207" key="GridCell.Tab.0.right" timestamp="1604915258920">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="207" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1604915258920" />
+    <state width="1556" height="259" key="GridCell.Tab.1.bottom" timestamp="1604910471559">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="259" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1604910471559" />
+    <state width="1556" height="259" key="GridCell.Tab.1.center" timestamp="1604910471559">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="259" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1604910471559" />
+    <state width="1556" height="259" key="GridCell.Tab.1.left" timestamp="1604910471559">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="259" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1604910471559" />
+    <state width="1556" height="259" key="GridCell.Tab.1.right" timestamp="1604910471559">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1556" height="259" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1604910471559" />
+    <state x="602" y="339" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604915282347">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="602" y="339" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1600.860@0.0.1600.860" timestamp="1604915282347" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1604904595745">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1604904595745" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/java0/conc0301/sync/Thread2.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
