@@ -1,6 +1,4 @@
-package beanassemble;
-
-import org.springframework.stereotype.Component;
+package ztz.beanassemble;
 
 
 public class SpringBeanXml {

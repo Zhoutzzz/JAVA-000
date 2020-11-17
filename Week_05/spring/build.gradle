@@ -18,5 +18,9 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-beans', version: '5.2.10.RELEASE'
 // https://mvnrepository.com/artifact/org.springframework/spring-context
     compile group: 'org.springframework', name: 'spring-context', version: '5.2.10.RELEASE'
-
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.3.0.RELEASE'
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor
+//    compile group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: '2.3.0.RELEASE'
+    compile files('F:/IDEA_Project/ztz_spring_boot_starter/build/libs/ztz-0.0.1-SNAPSHOT.jar')
 }

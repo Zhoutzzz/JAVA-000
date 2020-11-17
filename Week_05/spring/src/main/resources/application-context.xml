@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <context:component-scan base-package="beanassemble" />
+    <context:component-scan base-package="ztz.beanassemble" />
 <!--    <context:annotation-config/>-->
-    <bean id="bean1" class="beanassemble.SpringBeanXml" primary="true"/>
+    <bean id="bean1" class="ztz.beanassemble.SpringBeanXml" primary="true"/>
 </beans>

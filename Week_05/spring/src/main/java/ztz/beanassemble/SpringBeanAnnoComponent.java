@@ -1,4 +1,4 @@
-package beanassemble;
+package ztz.beanassemble;
 
 import org.springframework.stereotype.Component;
 

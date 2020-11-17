@@ -1,4 +1,4 @@
-package beanassemble;
+package ztz.beanassemble;
 
 public class BeanClass {
     public void anno1() {
