@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ztz-0.0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../ztz_spring_boot_starter/build/libs/ztz-0.0.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
