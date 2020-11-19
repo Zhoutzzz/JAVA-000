@@ -13,12 +13,10 @@ public class HelloClassLoader extends ClassLoader {
         return defineClass(name, res, 0, res.length);
     }
 
-    public Class<?> loadFileByPath(String className, String path) throws ClassNotFoundException {
-        InputStream stream = null;
+    public Class<?> loadFileByPath(String className, InputStream data) throws ClassNotFoundException {
         try  {
-            stream = new FileInputStream(path);
-            res = new byte[stream.available()];
-            stream.read(res);
+            res = new byte[data.available()];
+            data.read(res);
             for (int i = 0; i < res.length; i++) {
                 res[i] = (byte) (255 - res[i]);
             }
@@ -26,7 +24,7 @@ public class HelloClassLoader extends ClassLoader {
             e.printStackTrace();
         } finally {
             try {
-                stream.close();
+                data.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
