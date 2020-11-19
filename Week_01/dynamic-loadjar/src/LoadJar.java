@@ -14,6 +14,7 @@ public class LoadJar {
             Object hello = dynamicLoadClass.invoke(demoInstance, "Hello");
             System.out.println(hello);
         }
+        urlClassLoader.close();
         System.gc();
     }
 }
