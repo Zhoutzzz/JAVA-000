@@ -2,10 +2,34 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:gali="http://www.zhoutzzz.org/schema/galigeigei"
+       xsi:schemaLocation="http://www.zhoutzzz.org/schema/galigeigei http://www.zhoutzzz.org/schema/galigeigei.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <gali:student id="s1">
+        <gali:property name="张三" gender="1"/>
+    </gali:student>
+
+    <gali:student id="s2">
+        <gali:property name="李四" gender="1"/>
+    </gali:student>
+
+    <gali:student id="s3">
+        <gali:property name="赵六" gender="1"/>
+    </gali:student>
+
+    <gali:student id="s4">
+        <gali:property name="陈七" gender="1"/>
+    </gali:student>
+
+    <gali:clazz id="c1" className="1班">
+        <gali:list name="students" ref="s1,s2,s3,s4"/>
+    </gali:clazz>
+
+    <gali:school id="sch1" schoolName="清华大学">
+        <gali:list name="clazzes" ref="c1"/>
+    </gali:school>
 
     <context:component-scan base-package="ztz.beanassemble" />
-<!--    <context:annotation-config/>-->
-    <bean id="bean1" class="ztz.beanassemble.SpringBeanXml" primary="true"/>
 </beans>
