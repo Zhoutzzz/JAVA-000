@@ -1,12 +1,10 @@
 package demo;
 
-public class NormalObj {
+public class NormalObj implements NormalInterface{
 
-
-    public String gali() {
-        System.out.println("真实方法");
-        return "success";
+    @Override
+    public String test() {
+        System.out.println("--------------------------------这是真实方法，执行真正的业务--------------------------------");
+        return "this is real";
     }
-
-
 }

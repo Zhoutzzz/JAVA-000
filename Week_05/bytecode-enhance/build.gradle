@@ -25,3 +25,25 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
+jar {
+    manifest {
+        attributes 'Premain-Class': 'demo.MyAgent'
+        attributes 'Can-Redefine-Classes' : true
+        attributes 'Can-Retransform-Classes' : true
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+//task runPremainBuddyDemo(type: JavaExec) {
+//    manifest {
+//        attributes 'Premain-Class': 'demo.MyAgent'
+//        attributes 'Can-Redefine-Classes' : true
+//        attributes 'Can-Retransform-Classes' : true
+//    }
+//    main = "com.demo.Test"
+//    classpath = sourceSets.main.runtimeClasspath
+//    jvmArgs = ["-javaagent:${project.rootDir}/build/libs/bytecode-enhance-1.0-SNAPSHOT.jar=get.*"]
+//}

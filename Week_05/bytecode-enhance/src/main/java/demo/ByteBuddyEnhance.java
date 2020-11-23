@@ -2,26 +2,29 @@ package demo;
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.MethodDelegation;
-import net.bytebuddy.matcher.ElementMatchers;
+
+import static net.bytebuddy.matcher.ElementMatchers.named;
 
 public class ByteBuddyEnhance {
 
+    static ByteBuddy buddy = new ByteBuddy();
 
-    public static void main(String[] args) throws Exception {
-        ByteBuddy buddy = new ByteBuddy();
-        String o = buddy.subclass(NormalObj.class)
-                .method(ElementMatchers.named("gali"))
+
+    public static Object enhance(Object target) throws Exception{
+
+        NormalInterface enhanceObj = (NormalInterface) buddy.subclass(target.getClass())
+                .implement(NormalInterface.class)
+                .method(named("test"))
                 .intercept(MethodDelegation
                         .withDefaultConfiguration()
-                        .filter(ElementMatchers.named("gali2"))
-                        .to(TestObj.class))
+                        .filter(named("interceptor"))
+                        .to(AOPInterceptor.class))
                 .make()
-                .load(NormalObj.class.getClassLoader())
+                .load(NormalInterface.class.getClassLoader())
                 .getLoaded()
                 .getDeclaredConstructor()
-                .newInstance()
-                .gali();
+                .newInstance();
 
-        System.out.println(o);
+        return enhanceObj;
     }
 }
