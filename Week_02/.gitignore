@@ -2,3 +2,5 @@
 /http-ftp-server/gradlew
 /http-ftp-server/gradlew.bat
 /http-ftp-server/.gradle/
+/http-ftp-server/build/
+/http-ftp-server/out/
