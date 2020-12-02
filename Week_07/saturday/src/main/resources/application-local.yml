@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    master:
+      password: root
+      username: root
+      url: jdbc:mysql://127.0.0.1:3306/homework?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      type: com.zaxxer.hikari.HikariDataSource
+    cluster:
+    - key: slave1
+      password: root
+      username: root
+      url: jdbc:mysql://127.0.0.1:3307/homework?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
