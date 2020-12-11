@@ -1,23 +1,8 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package org.week08.account.service;
 
 import account.api.AccountService;
+import account.api.InlineService;
 import account.dto.AccountDTO;
 import account.dto.AccountNestedDTO;
 import account.entity.AccountDO;
@@ -27,7 +12,6 @@ import inventory.dto.InventoryDTO;
 import org.dromara.hmily.annotation.HmilyTAC;
 import org.dromara.hmily.annotation.HmilyTCC;
 import org.dromara.hmily.common.exception.HmilyRuntimeException;
-import org.dromara.hmily.demo.common.account.api.InlineService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,25 +43,27 @@ public class AccountServiceImpl implements AccountService {
      */
     private static AtomicInteger confrimCount = new AtomicInteger(0);
 
-    private final AccountMapper accountMapper;
+    @Autowired(required = false)
+    private  AccountMapper accountMapper;
 
-    private final InventoryService inventoryService;
+    @Autowired(required = false)
+    private  InventoryService inventoryService;
 
-    private final InlineService inlineService;
+    @Autowired(required = false)
+    private  InlineService inlineService;
 
     /**
      * Instantiates a new Account service.
      *
      * @param accountMapper the account mapper
      */
-    @Autowired(required = false)
-    public AccountServiceImpl(final AccountMapper accountMapper,
-                              final InventoryService inventoryService,
-                              final InlineService inlineService) {
-        this.accountMapper = accountMapper;
-        this.inventoryService = inventoryService;
-        this.inlineService = inlineService;
-    }
+//    public AccountServiceImpl(final AccountMapper accountMapper,
+//                              final InventoryService inventoryService,
+//                              final InlineService inlineService) {
+//        this.accountMapper = accountMapper;
+//        this.inventoryService = inventoryService;
+//        this.inlineService = inlineService;
+//    }
 
     @Override
     @HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")

@@ -1,7 +1,7 @@
 package org.week08.account.service;
 
+import account.api.InlineService;
 import org.dromara.hmily.annotation.HmilyTCC;
-import org.dromara.hmily.demo.common.account.api.InlineService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

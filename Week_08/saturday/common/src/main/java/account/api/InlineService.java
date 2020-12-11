@@ -1,4 +1,4 @@
-package org.dromara.hmily.demo.common.account.api;
+package account.api;
 
 /**
  * @author xiaoyu(Myth)
