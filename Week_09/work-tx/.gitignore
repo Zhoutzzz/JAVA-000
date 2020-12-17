@@ -1,0 +1,11 @@
+/.idea/
+/common/target/
+/transaction/.idea/
+/transaction/target/
+/transaction/transcation.iml
+/transaction01/transcation01.iml
+/transaction01/transcation.iml
+/transaction01/target/
+/transaction01/.idea/
+/work-tx.iml
+/common/common.iml
