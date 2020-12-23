@@ -4,14 +4,17 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.multipart.*;
 import io.netty.handler.stream.ChunkedFile;
 import io.netty.util.CharsetUtil;
 import io.netty.util.internal.SystemPropertyUtil;
 
 import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.util.regex.Pattern;
 
@@ -21,14 +24,195 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 public class HttpTransportServer extends ChannelInboundHandlerAdapter {
 
-    private FullHttpRequest request;
+    private HttpRequest request;
     private static final Pattern ALLOWED_FILE_NAME = Pattern.compile("[^-\\._]?[^<>&\\\"]*");
     private static final Pattern INSECURE_URI = Pattern.compile(".*[<>&\"].*");
 
+    private static final String uploadUrl = "/up";
+
+    private static final String fromFileUrl = "/post_multipart";
+
+    private static final HttpDataFactory factory =
+            new DefaultHttpDataFactory(DefaultHttpDataFactory.MINSIZE); // Disk if size exceed
+
+    private HttpPostRequestDecoder decoder;
+
+    static {
+        DiskFileUpload.deleteOnExitTemporaryFile = true; // should delete file
+        // on exit (in normal
+        // exit)
+        DiskFileUpload.baseDirectory = null; // system temp directory
+        DiskAttribute.deleteOnExitTemporaryFile = true; // should delete file on
+        // exit (in normal exit)
+        DiskAttribute.baseDirectory = null; // system temp directory
+    }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        this.request = (FullHttpRequest) msg;
+        this.request = (HttpRequest) msg;
+
+        URI uri = new URI(request.uri());
+
+        System.out.println(uri);
+
+        urlRoute(ctx, uri.getPath());
+
+        if (decoder != null) {
+            decoder.offer((HttpContent) msg);
+            readHttpDataChunkByChunk();
+            System.out.println("LastHttpContent");
+            reset();
+            writeResponse(ctx, "<h1>上传成功</h1>");
+        }
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
+        ctx.close();
+    }
+
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        if (decoder != null) {
+            decoder.cleanFiles();
+        }
+    }
+
+    // url路由
+    private void urlRoute(ChannelHandlerContext ctx, String uri) {
+
+        StringBuilder urlResponse = new StringBuilder();
+
+        // 访问文件上传页面
+        if (uri.startsWith(uploadUrl)) {
+
+            urlResponse.append(getUploadResponse());
+
+        } else if (uri.startsWith(fromFileUrl)) {
+
+            decoder = new HttpPostRequestDecoder(factory, request);
+
+            return;
+
+        } else {
+//            urlResponse.append(getHomeResponse());
+            try {
+                fileListenAndDownload(ctx);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        writeResponse(ctx, urlResponse.toString());
+
+    }
+
+    private void writeResponse(ChannelHandlerContext ctx, String context) {
+
+        ByteBuf buf = Unpooled.copiedBuffer(context, CharsetUtil.UTF_8);
+
+        FullHttpResponse response = new DefaultFullHttpResponse(
+                HttpVersion.HTTP_1_1, HttpResponseStatus.OK, buf);
+
+        response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html;charset=utf-8");
+
+
+        //设置短连接 addListener 写完马上关闭连接
+        ctx.channel().writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
+
+    }
+
+    private String getUploadResponse() {
+
+        return "<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Title</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "\n" +
+                "<form action=\"http://127.0.0.1:10001/post_multipart\" enctype=\"multipart/form-data\" method=\"POST\">\n" +
+                "\n" +
+                "\n" +
+                "    <input type=\"file\" name=" +
+                " " +
+                "" +
+                "\"YOU_KEY\">\n" +
+                "\n" +
+                "    <input type=\"submit\" name=\"send\">\n" +
+                "\n" +
+                "</form>\n" +
+                "\n" +
+                "</body>\n" +
+                "</html>";
+
+    }
+
+
+    private void readHttpDataChunkByChunk() throws IOException {
+        InterfaceHttpData data = decoder.next();
+
+        if (data != null) {
+
+            if (data.getHttpDataType() == InterfaceHttpData.HttpDataType.FileUpload) {
+
+                FileUpload fileUpload = (FileUpload) data;
+
+                if (fileUpload.isCompleted()) {
+
+                    fileUpload.isInMemory();// tells if the file is in Memory
+                    // or on File
+                    fileUpload.renameTo(new File(PathUtil.getFileBasePath() + "/" + fileUpload.getFilename())); // enable to move into another
+                    // File dest
+                    decoder.removeHttpDataFromClean(fileUpload); //remove
+
+                }
+
+
+            }
+
+        }
+
+//        while (decoder.hasNext()) {
+//
+//
+//        }
+
+    }
+
+    private void reset() {
+
+        request = null;
+
+        // destroy the decoder to release all resources
+        decoder.destroy();
+
+        decoder = null;
+
+    }
+
+
+    static final class PathUtil {
+        private static final ClassLoader classLoader = PathUtil.class.getClassLoader();
+
+        public static String getFileBasePath() {
+            String os = System.getProperty("os.name");
+            String basePath;
+            basePath = "/Users/zhoutzzz/Desktop";
+//            if (os.toLowerCase().startsWith("win")) {
+//                basePath = "D:/warehouse/";
+//            } else {
+//                basePath = "/root/upload_source";
+//            }
+            basePath = basePath.replace("/", File.separator);
+            return basePath;
+        }
+    }
+
+    private void fileListenAndDownload(ChannelHandlerContext ctx) throws Exception {
         String uri = request.uri();
         String path = sanitizeUri(uri);
         File f = new File(path);
@@ -161,7 +345,7 @@ public class HttpTransportServer extends ChannelInboundHandlerAdapter {
             }
         }
 
-        buf.append("</ul></body></html>\r\n");
+        buf.append("</ul><a href='/up' >上传</a> </body></html>\r\n");
 
         ByteBuf buffer = ctx.alloc().buffer(buf.length());
         buffer.writeCharSequence(buf.toString(), CharsetUtil.UTF_8);
@@ -173,13 +357,13 @@ public class HttpTransportServer extends ChannelInboundHandlerAdapter {
     }
 
     private void sendAndCleanupConnection(ChannelHandlerContext ctx, FullHttpResponse response) {
-        final FullHttpRequest request = this.request;
+        final HttpRequest request = this.request;
         final boolean keepAlive = HttpUtil.isKeepAlive(request);
         HttpUtil.setContentLength(response, response.content().readableBytes());
+        response.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE);
         if (!keepAlive) {
             // We're going to close the connection as soon as the response is sent,
             // so we should also make it clear for the client.
-            response.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE);
         } else if (request.protocolVersion().equals(HTTP_1_0)) {
             response.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
         }
