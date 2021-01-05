@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group 'org.week11'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.4.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.3.4.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter
+    compile group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.13.6'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
