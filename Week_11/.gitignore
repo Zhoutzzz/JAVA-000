@@ -1,0 +1,7 @@
+# Default ignored files
+/shelf/
+/.idea
+
+/distribute/out/
+/distribute/build/
+/distribute/.gradle/
