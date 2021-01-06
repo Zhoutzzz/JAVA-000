@@ -45,10 +45,10 @@ replicaof 192.168.1.2 6379
 replicaof指定为宿主机ip，docker中指定为127.0.0.1会连接失败。
 
 可以看到主库和从库的数据都是一样的。
-![从库](redis-ms/pic/ms1.png)
-![主库](redis-ms/pic/ms2.png)
+![从库](pic/ms1.png)
+![主库](pic/ms2.png)
 
 往从库写，出现报错，说明主从配置有效，这时候往主库写一个值，从库也同步到了。
 
-![](redis-ms/pic/ms3.png)
-![](redis-ms/pic/ms4.png)
+![](pic/ms3.png)
+![](pic/ms4.png)
