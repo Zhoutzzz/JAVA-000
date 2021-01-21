@@ -1,1 +1,3 @@
 学习笔记
+
+基于老师第一版本，使用数组实现自定义队列CustomArrayQueue，代替原本的LinkedBlockingQueue.
